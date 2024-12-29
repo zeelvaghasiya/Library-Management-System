@@ -29,6 +29,10 @@ class Book {
     viewAvailableBooks() {
         return this.books.filter(book => book.isAvailable);
       }
+
+    viewAllBooks() {
+        return this.books;
+      }
   
   }
   
