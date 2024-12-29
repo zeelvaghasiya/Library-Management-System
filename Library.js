@@ -25,6 +25,10 @@ class Book {
         console.error(`Error adding book: ${error.message}`);
       }
     }
+
+    viewAvailableBooks() {
+        return this.books.filter(book => book.isAvailable);
+      }
   
   }
   
