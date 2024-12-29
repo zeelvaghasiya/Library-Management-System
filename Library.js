@@ -50,6 +50,22 @@ class Library {
         }
     }
 
+    returnBook(isbn) {
+        try {
+            const book = this.books.find(book => book.isbn === isbn);
+            if (!book) {
+                throw new Error("Book not found.");
+            }
+            if (book.isAvailable) {
+                throw new Error("Book was not borrowed.");
+            }
+            book.isAvailable = true;
+            console.log(`Returned: ${book.title}`);
+        } catch (error) {
+            console.error(`Error returning book: ${error.message}`);
+        }
+    }
+
 }
 
 module.exports = Library;
