@@ -75,4 +75,32 @@ describe("Library Management System", () => {
             expect(error.message).toBe("Book is not available for borrowing.");
         }
     });
+
+    // Test for returning a book
+    test("should allow returning a borrowed book", () => {
+        library.addBook("123", "JavaScript Basics", "vishnu Rai", 2021);
+        library.borrowBook("123");
+        library.returnBook("123");
+
+        const availableBooks = library.viewAvailableBooks();
+        expect(availableBooks).toHaveLength(1);
+        expect(availableBooks[0].isAvailable).toBe(true);
+    });
+
+    test("should throw an error if trying to return a book that was not borrowed", () => {
+        try {
+            library.addBook("123", "JavaScript Basics", "vishnu Rai", 2021);
+            library.returnBook("123");
+        } catch (error) {
+            expect(error.message).toBe("Book was not borrowed.");
+        }
+    });
+
+    test("should throw an error if trying to return a non-existent book", () => {
+        try {
+            library.returnBook("999");
+        } catch (error) {
+            expect(error.message).toBe("Book not found.");
+        }
+    });
 });
